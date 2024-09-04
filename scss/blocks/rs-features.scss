@@ -1,0 +1,151 @@
+.rs-features {
+	// .rs-features__container
+	&__container {
+	}
+
+	// .rs-features__header
+	&__header {
+		@media (min-width: 991.98px) {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+		}
+	}
+
+	// .rs-features__title
+	&__title {
+		@media (min-width: 991.98px) {
+			max-width: 887px;
+		}
+	}
+
+	// .rs-features__slider
+	&__slider {
+		margin-top: 50px;
+		overflow: visible;
+
+		@media (max-width: 1439.98px) {
+			margin-top: 30px;
+		}
+	}
+
+	// .rs-features__swiper
+	&__swiper {
+		@media (min-width: 991.98px) {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 24px;
+		}
+	}
+
+	// .rs-features__slide
+	&__slide {
+		min-height: 1px;
+		height: auto;
+	}
+
+	// .rs-features__item
+	&__item {
+		height: 100%;
+		width: 100%;
+		min-height: 239px;
+		padding: 24px;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		flex-direction: column;
+		border-radius: 20px;
+		backdrop-filter: blur(8px);
+		background: #f1f1f1;
+		position: relative;
+
+		@media (max-width: 1439.98px) {
+			padding: 20px;
+			min-height: 200px;
+		}
+
+		@media (max-width: 1169.98px) {
+			padding: 15px;
+		}
+	}
+
+	&__body {
+		position: relative;
+		height: 100%;
+
+		@media (min-width: 991.98px) {
+			padding-right: 130px;
+
+			@media (max-width: 1439.98px) {
+				padding-right: 80px;
+			}
+
+			@media (max-width: 1169.98px) {
+				padding-right: 70px;
+			}
+		}
+	}
+
+	&__desc {
+		@media (min-width: 991.98px) {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			flex-direction: column;
+		}
+
+		@media (max-width: 991.98px) {
+			margin-top: 20px;
+		}
+
+		p {
+			// line-height: 30px;
+			line-height: 165%;
+			margin-top: 23px;
+
+			@media (max-width: 991.98px) {
+				margin-top: 5px;
+			}
+		}
+	}
+
+	// .rs-features__img
+	&__img {
+		width: 75px;
+		height: 75px;
+		border-radius: 50%;
+		background-color: var(--primary-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 20px;
+
+		@media (max-width: 1439.98px) {
+			width: 60px;
+			height: 60px;
+			margin-bottom: 0px;
+			padding: 16px;
+		}
+
+		@media (max-width: 1169.98px) {
+			width: 50px;
+			height: 50px;
+			padding: 12px;
+			bottom: 0;
+		}
+
+		@media (min-width: 991.98px) {
+			position: absolute;
+			bottom: 14px;
+			right: 0;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+}
