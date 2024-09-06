@@ -8,6 +8,8 @@
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="lib/swiper/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="lib/fancybox/fancybox.css" />
+	<link rel="stylesheet" href="https://unpkg.com/lightgallery@2.4.0/css/lightgallery-bundle.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/lightgallery@2.4.0/css/lg-zoom.css">
 	<link rel="stylesheet" href="lib/aos/aos.css">
 	<link rel="stylesheet" href="css/rs-style.css" />
 	<title>А1 Модульные дома V3 - Главная</title>
@@ -767,11 +769,12 @@
 						</div>
 					</div>
 
-					<div class="rs-slider-block__slider swiper" data-aos="fade-up" data-aos-delay="300">
+					<div class="rs-slider-block__slider swiper" data-aos="fade-up" data-aos-delay="300" data-gallery>
 						<div class="rs-slider-block__swiper swiper-wrapper">
 							<div class="rs-slider-block__slide swiper-slide">
 								<div class="rs-video">
-									<a href="https://vk.com/video-218432027_456239018" data-fancybox="gallery">
+									<a href="#"
+										data-video-src="https://vk.com/video_ext.php?oid=-218432027&id=456239018&hash=VIDEO_HASH">
 										<div class="rs-video__item">
 											<div class="rs-video__img">
 												<img src="./img/blocks/video/video-preivews_1.jpg" alt="">
@@ -786,7 +789,8 @@
 
 							<div class="rs-slider-block__slide swiper-slide">
 								<div class="rs-video">
-									<a href="https://www.youtube.com/watch?v=-NhhrNX8hLs" data-fancybox="gallery">
+									<a href="#" data-gallery-item
+										data-src="https://vk.com/video_ext.php?oid=-218432027&id=456239018&hash=VIDEO_HASH">
 										<div class="rs-video__item">
 											<div class="rs-video__img">
 												<img src="./img/blocks/video/video-preivews_2.jpg" alt="">
@@ -801,7 +805,8 @@
 
 							<div class="rs-slider-block__slide swiper-slide">
 								<div class="rs-video">
-									<a href="https://www.youtube.com/watch?v=QqrWi3tDzEI" data-fancybox="gallery">
+									<a href="https://vk.com/video_ext.php?oid=-218432027&id=456239018&hash=VIDEO_HASH"
+										data-fancybox="gallery">
 										<div class="rs-video__item">
 											<div class="rs-video__img">
 												<img src="./img/blocks/video/video-preivews_1.jpg" alt="">
@@ -1453,13 +1458,86 @@
 
 	</div>
 
+	<div id="videoModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+
 	<script src="lib/swiper/swiper-bundle.min.js"></script>
 	<script src="js/rs-sliders-init.js"></script>
 	<script src="lib/fancybox/fancybox.umd.js"></script>
 	<script>Fancybox.bind("[data-fancybox]", { Thumbs: { type: 'classic', }, });</script>
+	<script src="https://unpkg.com/lightgallery@2.4.0/lightgallery.min.js"></script>
+	<script src="https://unpkg.com/lightgallery@2.4.0/plugins/zoom/lg-zoom.umd.js"></script>
+	<script>
+
+		/* ====================================
+		Инициализация галереи
+		==================================== */
+		/*
+		data-gallery - блок галереи 
+		data-gallery-item - блок с картинкой
+		data-src - ссылка на картинку 
+		*/
+		if (document.querySelector('[data-gallery]')) {
+			const galleries = document.querySelectorAll('[data-gallery]');
+			if (galleries.length) {
+				let galleyItems = [];
+				galleries.forEach(gallery => {
+					galleyItems.push({
+						gallery,
+						galleryClass: lightGallery(gallery, {
+							plugins: [lgZoom],
+							licenseKey: '7EC452A9-0CFD441C-BD984C7C-17C8456E',
+							selector: '[data-gallery-item]',
+							// Скорость
+							speed: 800,
+							// Отключить кнопку Скачать
+							download: false,
+							// Надпись под фото (Вывод атрибута alt у img)
+							appendSubHtmlTo: false,
+						})
+					})
+				});
+			}
+		}
+	</script>
 	<script src="lib/aos/aos.js"></script>
 	<script>AOS.init({ duration: 500, easing: "ease-out-quart", once: true });</script>
 	<script src="js/rs-script.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const modal = document.getElementById("videoModal");
+			const videoFrame = document.getElementById("videoFrame");
+			const closeModal = document.querySelector(".close");
+
+			// Открытие модального окна
+			document.querySelectorAll('.rs-slider-block__slide .rs-video a').forEach(link => {
+				link.addEventListener('click', function (e) {
+					e.preventDefault();
+					const videoSrc = this.getAttribute('data-video-src');
+					videoFrame.src = videoSrc;
+					modal.style.display = "block";
+				});
+			});
+
+			// Закрытие модального окна
+			closeModal.addEventListener('click', function () {
+				modal.style.display = "none";
+				videoFrame.src = ""; // Очищаем источник, чтобы остановить видео
+			});
+
+			// Закрытие по клику вне окна
+			window.addEventListener('click', function (event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+					videoFrame.src = ""; // Очищаем источник, чтобы остановить видео
+				}
+			});
+		});
+	</script>
 
 </body>
 
